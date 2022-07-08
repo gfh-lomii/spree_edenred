@@ -1,0 +1,9 @@
+<div class="form-group mb-4">
+  <div class="row">
+    <div class="col-12">
+      <%= label_tag Spree.t(:phone) %>
+      <%= text_field_tag 'order[rut]', @order.rut, class: "form-control" %>
+      <span id='phone_required' class="alert-danger" style="font-size: 14px;font-weight: normal; display: none;"><%= Spree.t(:required) %></span>
+    </div>
+  </div>
+</div>

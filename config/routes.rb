@@ -1,3 +1,4 @@
-Spree::Core::Engine.add_routes do
-  # Add your extension routes here
+Spree::Core::Engine.routes.draw do
+  get '/edenred/login', to: 'edenred#login'
+  get '/edenred/logout', to: 'edenred#logout'
 end

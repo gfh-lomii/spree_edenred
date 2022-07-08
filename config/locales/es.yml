@@ -1,0 +1,27 @@
+es:
+  spree:
+    processing_edenred_payment: ¡Estamos procesando tu pago con Edenred!
+    authentication_url: Url de autenticación
+    payment_url: URL de pago
+    merchant_id: Id del comercio
+    edenred:
+      INVALID_MERCHANT: El comerciante no es válido
+      INVALID_AMOUNT: Monto invalido
+      LIMIT_EXCEEDED: Límite excedido
+      TRANSACTION_DUPLICATED: Transacción duplicada
+      CARD_NOT_FOUND: Tarjeta no encontrada
+      CARD_NOT_ACTIVATED: Tarjeta no activada
+      INSUFFICIENT_FUNDS: Saldo insuficiente
+      INVALID_CURRENCY_CODE: Moneda inválido
+      TRANSACTION_NOT_FOUND: Transacción no encontrada
+      INVALID_CARD: Tarjeta invalida
+      UNAUTHORIZED: Usuario no autorizado
+      PRECONDITION_FAILED: Uno de los datos del usuario no es válido para procesar la solicitud dada
+      TRANSACTION_LIMIT_EXCEEDED: Superó el límite de transacciones por día
+      INTERNAL_ERROR: Error de servidor Edenred
+      NOT_IMPLEMENTED: El servidor no reconoce el método de solicitud o no tiene la capacidad de cumplir con la solicitud.
+      BAD_GATEWAY: Oups... ¡Algo anda mal en uno de los servidores subyacentes! Póngase en contacto con el administrador para informar el problema.
+      SERVICE_UNAVAILABLE: Oups... ¡Algo anda mal en uno de los servidores subyacentes! Póngase en contacto con el administrador para informar el problema.
+      GATEWAY_TIMEOUT: Timeout. Intenta nuevamente
+      INVALID_TOKEN: Token invalido
+      FILIATON_CANCELED: No se permiten transacciones con este comercio

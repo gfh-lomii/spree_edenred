@@ -7,7 +7,6 @@ module Spree
         edenred_user = order.user.edenred_user
         return success(edenred_user.token) if edenred_user.present? && edenred_user.token_available?
 
-        #url = URI("https://sso.sbx.edenred.io/connect/token")
         auth_url = order.payments.last.payment_method.preferences[:authentication_url]
         url = URI("#{auth_url}/connect/token")
         https = Net::HTTP.new(url.host, url.port)
@@ -44,8 +43,8 @@ module Spree
         if edenred_user
           edenred_user.update(token: token, token_expires_at: expires_at, mobile: request_mobile)
         else
-          Spree::EdenredUser.create(token: token, token_expires_at: expires_at,
-            user_id: order.user_id, mobile: request_mobile)
+          Spree::EdenredUser.create(token: token, token_expires_at: expires_at, user_id: user_id,
+            mobile: request_mobile)
         end
       end
     end

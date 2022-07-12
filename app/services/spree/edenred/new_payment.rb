@@ -12,7 +12,6 @@ module Spree
       end
 
       def new_payment_request(order, token)
-        #url = URI("https://directpayment.stg.eu.edenred.io/v2/transactions")
         preferences = order.payments.last.payment_method.preferences
         payment_url = preferences[:payment_url]
         url = URI("#{payment_url}/transactions")

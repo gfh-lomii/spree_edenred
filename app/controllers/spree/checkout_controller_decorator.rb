@@ -17,11 +17,7 @@ module Spree
         payment_number = edenred_create_payment(payment_method)
         edenred_error && return unless payment_number.present?
 
-        #if @order.user&.edenred_user&.token_available?
-          # redirect_to edenred_login_url
-        #else
-          redirect_to payment_method.authorize_code_url
-        #end
+        redirect_to payment_method.authorize_code_url
       end
     end
 

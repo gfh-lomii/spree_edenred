@@ -7,7 +7,6 @@ module Spree
 
       if resp.success
         @order.reload
-        #estimate_charge(@order.user.edenred_user)
         resp_pay = Spree::Edenred::NewPayment.call(order: @order, token: @order.user.edenred_user.token)
 
         if resp_pay.success
@@ -24,9 +23,8 @@ module Spree
       end
     end
 
-    def estimate_charge
-      resp = Spree::Edenred::EstimateCharge.call(order: @order, token: edenred_user.token)
-      resp.success
+    def logout
+      redirect_to root_path
     end
 
     def edenred_notification

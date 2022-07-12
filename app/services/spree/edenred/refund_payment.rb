@@ -13,7 +13,6 @@ module Spree
 
       def refund_payment_request(order, token)
         authorization_id = order.payments.with_authorization_id.last.authorization_id
-        #url = URI("https://directpayment.stg.eu.edenred.io/v2/transactions/{{authorization_id}}/actions/refund")
         payment_url = order.payments.last.payment_method.preferences[:payment_url]
         url = URI("#{payment_url}/transactions/#{authorization_id}/actions/refund")
         https = Net::HTTP.new(url.host, url.port)

@@ -4,6 +4,8 @@ es:
     authentication_url: Url de autenticación
     payment_url: URL de pago
     merchant_id: Id del comercio
+    return_url_login: URL retorno Login
+    return_url_logout: URL retorno Logout
     edenred:
       INVALID_MERCHANT: El comerciante no es válido
       INVALID_AMOUNT: Monto invalido

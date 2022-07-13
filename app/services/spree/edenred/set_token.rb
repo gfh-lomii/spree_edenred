@@ -7,8 +7,8 @@ module Spree
         edenred_user = order.user.edenred_user
         return success(edenred_user.token) if edenred_user.present? && edenred_user.token_available?
 
-        auth_url = order.payments.last.payment_method.preferences[:authentication_url]
-        url = URI("#{auth_url}/connect/token")
+        payment_method = order.payments.last.payment_method
+        url = URI("#{payment_method.preferences[:authentication_url]}/connect/token")
         https = Net::HTTP.new(url.host, url.port)
         https.use_ssl = true
         https.verify_mode = OpenSSL::SSL::VERIFY_NONE
@@ -21,7 +21,7 @@ module Spree
           'client_id': ENV['EDENRED_CLIENT_ID__AUTH'],
           'client_secret': ENV['EDENRED_CLIENT_SECRET_AUTH'],
           'code': code,
-          'redirect_uri': 'https://lomi-dev.herokuapp.com/edenred/login'
+          'redirect_uri': payment_method.preferences[:return_url_login]
         }
 
         query = URI.encode_www_form(params)

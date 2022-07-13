@@ -1,11 +1,12 @@
 module Spree
   class EdenredController < StoreController
     before_action :load_data
+    before_action :valite_code
 
     def login
-      resp = Spree::Edenred::SetToken.call(order: @order, code: params[:code])
+      token = Spree::Edenred::SetToken.call(order: @order, code: params[:code])
 
-      if resp.success
+      if token.success
         @order.reload
         resp_pay = Spree::Edenred::NewPayment.call(order: @order, token: @order.user.edenred_user.token)
 
@@ -19,7 +20,7 @@ module Spree
           error(resp_pay.value)
         end
       else
-        error(resp.value)
+        error(token.value)
       end
     end
 
@@ -37,6 +38,10 @@ module Spree
     end
 
     private
+
+    def valite_code
+      redirect_to root_path if params[:code].blank?
+    end
 
     def load_data
       @order = current_order || spree_current_user.orders.last || raise(ActiveRecord::RecordNotFound)

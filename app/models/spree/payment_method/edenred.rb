@@ -3,19 +3,23 @@ module Spree
     preference :merchant_id, :string
     preference :authentication_url, :string
     preference :payment_url, :string
+    preference :return_url_login, :string
+    preference :return_url_logout, :string
 
     def authorize_code_url
-      # "#{preferences[:authentication_url]}/connect/authorize?response_type=code&client_id=#{ENV['EDENRED_CLIENT_ID__AUTH']}&scope=openid%20edg-xp-mealdelivery-api%20offline_access&redirect_uri=#{return_url_login}&state=d710ce14-ace6-4300-8e58-5877e7b92500&nonce=11df89b0-4bde-4696-a00ed04cf06b9ab2&acr_values=tenant:cl-ben&ui_locales=en"
-      # "#{preferences[:authentication_url]}/login?ReturnUrl=%2Fconnect%2Fauthorize%2Fcallback%3Fresponse_type%3Dcode%26client_id%3D#{ENV['EDENRED_CLIENT_ID__AUTH']}%26scope%3Dopenid%2520edg-xp-mealdelivery-api%2520offline_access%26redirect_uri%3D#{return_url_login}%26state%3Dabc123%26nonce%3D456azerty%26acr_values%3Dtenant%253Acl-ben%26ui_locales%3Den"
-      "https://sso.sbx.edenred.io/login?ReturnUrl=%2Fconnect%2Fauthorize%2Fcallback%3Fresponse_type%3Dcode%26client_id%3D#{ENV['EDENRED_CLIENT_ID__AUTH']}%26scope%3Dopenid%2520edg-xp-mealdelivery-api%2520offline_access%26redirect_uri%3Dhttps%253A%252F%252Flomi-dev.herokuapp.com%252Fedenred%252Flogin%26state%3Dd710ce14-ace6-4300-8e58-5877e7b92500%26nonce%3D11df89b0-4bde-4696-a00ed04cf06b9ab2%26acr_values%3Dtenant%253Acl-ben%26ui_locales%3Den#"
+      "#{preferences[:authentication_url]}/login?ReturnUrl=%2Fconnect%2Fauthorize%2Fcallback%3Fresponse_type%3Dcode%26client_id%3D#{ENV['EDENRED_CLIENT_ID__AUTH']}%26scope%3Dopenid%2520edg-xp-mealdelivery-api%2520offline_access%26redirect_uri%3D#{return_url_login}%26state%3Dd710ce14-ace6-4300-8e58-5877e7b92500%26nonce%3D11df89b0-4bde-4696-a00ed04cf06b9ab2%26acr_values%3Dtenant%253Acl-ben%26ui_locales%3Den#"
     end
 
     def return_url_login
-      "https://lomi-dev.herokuapp.com/api/edenred/login"
+      encode_url = ERB::Util.url_encode(preferences[:return_url_login])
+      re_encode_url = ERB::Util.url_encode(encode_url)
+      re_encode_url
     end
 
     def return_url_logout
-      "https://lomi-dev.herokuapp.com/api/edenred/logout"
+      encode_url = ERB::Util.url_encode(preferences[:return_url_logout])
+      re_encode_url = ERB::Util.url_encode(encode_url)
+      re_encode_url
     end
 
     def provider_class

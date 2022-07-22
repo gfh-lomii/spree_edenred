@@ -1,7 +1,9 @@
 module Spree
   class EdenredController < StoreController
+    before_action :valite_call_provider
     before_action :load_data
     before_action :valite_code
+    before_action :validate_payment_state
 
     def login
       token = Spree::Edenred::SetToken.call(order: @order, code: params[:code])
@@ -37,15 +39,28 @@ module Spree
       EdenredNotification.create(order_id: @order.id, payment_id: @payment.id)
     end
 
+    def valite_call_provider
+      if current_order || spree_current_user
+        true
+      else
+        render json: { status: :ok, code: params[:code] }
+      end
+    end
+
     private
+
+    def load_data
+      @order = current_order || spree_current_user.orders.last || raise(ActiveRecord::RecordNotFound)
+      @payment = @order.payments.order(:id).last
+    end
 
     def valite_code
       redirect_to root_path if params[:code].blank?
     end
 
-    def load_data
-      @order = current_order || spree_current_user.orders.last || raise(ActiveRecord::RecordNotFound)
-      @payment = @order.payments.order(:id).last
+    def validate_payment_state
+      flash[:error] = Spree.t(:validate_payment_state_edenred)
+      redirect_to root_path unless @order.payment?
     end
 
     def completion

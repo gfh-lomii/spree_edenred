@@ -59,8 +59,10 @@ module Spree
     end
 
     def validate_payment_state
+      return true if @payment.present?
+
       flash[:error] = Spree.t(:validate_payment_state_edenred)
-      redirect_to root_path unless @order.payment?
+      redirect_to root_path
     end
 
     def completion

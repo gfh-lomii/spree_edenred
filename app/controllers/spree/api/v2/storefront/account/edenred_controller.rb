@@ -8,19 +8,21 @@ module Spree
             before_action :ensure_order
             before_action :valite_code
             before_action :load_data
+            before_action :build_payment_method, only: %i[pay_with_edenred]
 
             def pay_with_edenred
               token = Spree::Edenred::SetToken.call(order: @order, code: params[:code])
 
               if token.success
                 @order.reload
-                resp_pay = Spree::Edenred::NewPayment.call(order: @order, token: @order.user.edenred_user.token)
+                resp_pay = Spree::Edenred::NewPayment.call(order: @order,
+                  token: @order.user.edenred_user.token)
 
                 if resp_pay.success
                   @order.skip_stock_validation = true
                   @order.next! unless @order.completed?
 
-                  edenred_notification
+                  EdenredNotification.find_or_create_by(order_id: @order.id, payment_id: @payment.id)
                   render json: { success: true, message: @response }
                 else
                   edenred_error(resp_pay.value)
@@ -32,12 +34,21 @@ module Spree
               edenred_error(e)
             end
 
-            def edenred_notification
-              notification = EdenredNotification.find_by(order_id: @order.id, payment_id: @payment.id)
-              EdenredNotification.create(order_id: @order.id, payment_id: @payment.id) if notification.blank?
-            end
-
             private
+
+            def build_payment_method
+              payment_method = Spree::PaymentMethod.find_by(type: 'Spree::PaymentMethod::Edenred')
+              payment = @order.payments.build(payment_method_id: payment_method.id,
+                amount: @order.total_to_edenred, state: 'checkout')
+
+              unless payment.save
+                raise "#{Spree.t(:cant_create_payment)} #{@payment.errors.full_messages.join("\n")}"
+              end
+
+              unless payment.pend!
+                raise "#{Spree.t(:cant_create_payment_pend)} #{@payment.errors.full_messages.join("\n")}"
+              end
+            end
 
             def load_data
               @order = spree_current_order

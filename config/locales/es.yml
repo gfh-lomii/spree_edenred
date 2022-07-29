@@ -8,6 +8,8 @@ es:
     return_url_logout: URL retorno Logout
     validate_payment_state_edenred: Ingresa al checkout para procesar el pago de tu orden
     edenred_code_required: Parámetro 'Code' es requerido
+    cant_create_payment: No se puede crear método de pago
+    cant_create_payment_pend: "Método de pago no puede pasar a estado 'Pendiente'"
     edenred:
       INVALID_MERCHANT: El comerciante no es válido
       INVALID_AMOUNT: Monto invalido

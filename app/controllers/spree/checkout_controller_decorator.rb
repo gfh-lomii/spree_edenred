@@ -2,9 +2,16 @@ module Spree
   module CheckoutControllerDecorator
     def self.prepended(base)
       base.before_action :pay_with_edenred, only: :update
+      base.before_action :validate_edenred_btn, only: %i[edit update]
     end
 
     private
+
+    def validate_edenred_btn
+      return false unless @order.payment?
+
+      @hide_edenred_btn = @order.includes_products_not_authorized_by_edenred?
+    end
 
     def pay_with_edenred
       return unless params[:state] == 'payment'

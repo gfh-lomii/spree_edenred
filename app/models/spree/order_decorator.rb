@@ -45,6 +45,10 @@ module Spree
       new_total = "#{total_to_edenred.to_s}00"
       new_total.to_i
     end
+
+    def includes_products_not_authorized_by_edenred?
+      products.map{ |p| p.taxon_ids.include?(2089) }.include?(true)
+    end
   end
 end
 

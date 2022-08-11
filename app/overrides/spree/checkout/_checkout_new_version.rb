@@ -6,7 +6,7 @@ Deface::Override.new(
     <% payment_method = Spree::PaymentMethod.active.available_on_front_end.find_by_type("Spree::PaymentMethod::Edenred") %>
         <% if payment_method && @ld_client.variation("edenred-payment", @ld_user, true) %>
           <label class="d-block" for="<%= dom_id(payment_method) %>">
-            <div class="card-lomi mb-3">
+            <div class="card-lomi mb-0">
               <div class="d-flex justify-content-between align-items-center px-1">
                 <div class="d-flex">
                   <div class="icon-lomi boton-rounded mr-3 shadow2-lomi justify-content-center align-items-center" style="width: 41px; height: 41px;">
@@ -30,7 +30,7 @@ Deface::Override.new(
               </div>
             </div>
             <% if @order.any_item_with_alcohol? %>
-              <p><%= Spree.t(:purchases_with_alcohol_not_allowed, payment_method: 'Edenred')%></p>
+              <p class="ml-4 texto-s"><%= Spree.t(:purchases_with_alcohol_not_allowed, payment_method: 'Edenred')%></p>
             <% end %>
           </label>
         <% end %>

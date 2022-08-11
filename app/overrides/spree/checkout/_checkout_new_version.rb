@@ -30,7 +30,7 @@ Deface::Override.new(
               </div>
             </div>
             <% if @order.any_item_with_alcohol? %>
-              <p>Compras con alcohol incluido no son permitidas por Sodexo.</p>
+              <p><%= Spree.t(:purchases_with_alcohol_not_allowed, payment_method: 'Edenred')%></p>
             <% end %>
           </label>
         <% end %>

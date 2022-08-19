@@ -4,7 +4,7 @@ Deface::Override.new(
   insert_top: '[data-hook="payment_methods_list"]',
   text: %{
     <% payment_method = Spree::PaymentMethod.active.available_on_front_end.find_by_type("Spree::PaymentMethod::Edenred") %>
-        <% if payment_method && @ld_client.variation("edenred-payment", @ld_user, true) %>
+        <% if payment_method && @ld_client.variation("edenred-payment-web", @ld_user, true) %>
           <label class="d-block" for="<%= dom_id(payment_method) %>">
             <div class="card-lomi mb-0">
               <div class="d-flex justify-content-between align-items-center px-1">

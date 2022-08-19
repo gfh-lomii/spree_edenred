@@ -4,7 +4,7 @@ Deface::Override.new(
   insert_top: '[data-hook="payment_methods_li"]',
   text: %{
     <% if method.type.eql?('Spree::PaymentMethod::Edenred') %>
-      <% next if !@ld_client.variation("edenred-payment", @ld_user, true) %>
+      <% next if !@ld_client.variation("edenred-payment-web", @ld_user, true) %>
       <% next if @hide_edenred_btn %>
     <% end %>
   }

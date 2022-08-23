@@ -23,7 +23,7 @@ module Spree
                   @order.next! unless @order.completed?
 
                   EdenredNotification.find_or_create_by(order_id: @order.id, payment_id: @payment.id)
-                  render json: { success: true, message: @response }
+                  render json: { success: true, message: resp_pay.value }
                 else
                   edenred_error(resp_pay.value)
                 end

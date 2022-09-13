@@ -1,5 +1,5 @@
 module SpreeEdenred
-  VERSION = '0.0.15'.freeze
+  VERSION = '0.0.16'.freeze
 
   module_function
 

@@ -47,6 +47,8 @@ module Spree
     end
 
     def includes_products_not_authorized_by_edenred?
+      return false unless Rails.env.production?
+
       products.map{ |p| p.taxon_ids.include?(2089) }.include?(true)
     end
   end

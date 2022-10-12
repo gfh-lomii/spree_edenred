@@ -48,6 +48,7 @@ module Spree
 
     def includes_products_not_authorized_by_edenred?
       return false unless Rails.env.production?
+      return true if store&.url.eql?('https://lomiexpress.cl')
 
       products.map{ |p| p.taxon_ids.include?(2089) }.include?(true)
     end

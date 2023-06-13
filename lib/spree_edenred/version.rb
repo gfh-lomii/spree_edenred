@@ -1,6 +1,5 @@
 module SpreeEdenred
-  VERSION = '0.0.20'.freeze
-
+  VERSION = '0.0.21'.freeze
   module_function
 
   # Returns the version of the currently loaded SpreeEdenred as a

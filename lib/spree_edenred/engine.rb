@@ -26,10 +26,5 @@ module SpreeEdenred
       app.config.spree.payment_methods << Spree::PaymentMethod::Edenred
       app.config.assets.precompile += %w(edenred_logo.png)
     end
-    initializer "spree.edenred_junaeb.payment_methods",
-                after: "spree.register.payment_methods" do |app|
-      app.config.spree.payment_methods << Spree::PaymentMethod::EdenredJunaeb
-      app.config.assets.precompile += %w(edenred_juaneb_logo.png)
-    end
   end
 end

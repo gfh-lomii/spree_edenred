@@ -20,8 +20,7 @@ module Spree
       pm_id = params[:order][:payments_attributes].first[:payment_method_id]
       payment_method = Spree::PaymentMethod.find(pm_id)
 
-      if payment_method && (payment_method.kind_of?(Spree::PaymentMethod::Edenred) ||
-        payment_method.kind_of?(Spree::PaymentMethod::EdenredJunaeb))
+      if payment_method && payment_method.kind_of?(Spree::PaymentMethod::Edenred)
         payment_number = edenred_create_payment(payment_method)
         edenred_error && return unless payment_number.present?
 

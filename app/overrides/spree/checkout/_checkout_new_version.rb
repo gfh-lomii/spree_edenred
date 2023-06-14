@@ -8,6 +8,7 @@ Deface::Override.new(
         <% if payment_method %>
           <% unless current_store&.url.eql?('https://lomiexpress.cl') %>
             <label class="d-block" for="<%= dom_id(payment_method) %>">
+            <!-- edenred2 -->
               <div class="card-lomi mb-0">
                 <div class="d-flex justify-content-between align-items-center px-1">
                   <div class="d-flex">

@@ -1,5 +1,5 @@
 Deface::Override.new(
-  virtual_path: 'spree/checkout/_payment_methods',
+  virtual_path: 'spree/checkout/_checkout_new_version',
   name: 'edenred_payment_method',
   insert_top: '[data-hook="payment_methods_li"]',
   text: %{

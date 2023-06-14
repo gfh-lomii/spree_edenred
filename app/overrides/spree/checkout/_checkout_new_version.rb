@@ -3,6 +3,7 @@ Deface::Override.new(
   name: 'edenred_payment_method',
   insert_top: '[data-hook="payment_methods_list"]',
   text: %{
+    <!-- edenred -->
     <% payment_method = current_store&.payment_methods.active.available_on_front_end.find_by_type("Spree::PaymentMethod::Edenred") %>
         <% if payment_method %>
           <% unless current_store&.url.eql?('https://lomiexpress.cl') %>

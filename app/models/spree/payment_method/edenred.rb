@@ -7,8 +7,8 @@ module Spree
     preference :return_url_logout, :string
 
     def authorize_code_url
-      # https://sso.edenred.io/connect/authorize?response_type=code&client_id=eb84aa5883d1408db36093921cbb5c99&scope=openid edg-xp-mealdelivery-api offline_access&redirect_uri=https://lomi.cl/edenred/login&state=abc123&nonce=456azerty&acr_values=tenant:cl-ben&ui_locales=es
-      "#{preferences[:authentication_url]}/connect/authorize?response_type=code&client_id=#{ENV['EDENRED_CLIENT_ID__AUTH']}&scope=openid edg-xp-mealdelivery-api offline_access&redirect_uri=#{return_url_login}&state=abc123&nonce=456azerty&acr_values=tenant:cl-ben&ui_locales=es"
+      "#{preferences[:authentication_url]}%2Fconnect%2Fauthorize%3Fresponse_type%3Dcode%26client_id%3D#{ENV['EDENRED_CLIENT_ID__AUTH']}%26scope%3Dopenid%20edg-xp-mealdelivery-api%20offline_access%26redirect_uri%3D#{return_url_login}%26state%3Dabc123%26nonce%3D456azerty%26acr_values%3Dtenant%3Acl-ben%26ui_locales%3Des"
+      #{preferences[:authentication_url]}/connect/authorize?response_type=code&client_id=#{ENV['EDENRED_CLIENT_ID__AUTH']}&scope=openid edg-xp-mealdelivery-api offline_access&redirect_uri=#{return_url_login}&state=abc123&nonce=456azerty&acr_values=tenant:cl-ben&ui_locales=es"
       # "#{preferences[:authentication_url]}/login?ReturnUrl=%2Fconnect%2Fauthorize%2Fcallback%3Fresponse_type%3Dcode%26client_id%3D#{ENV['EDENRED_CLIENT_ID__AUTH']}%26scope%3Dopenid%2520edg-xp-mealdelivery-api%2520offline_access%26redirect_uri%3D#{return_url_login}%26state%3Dd710ce14-ace6-4300-8e58-5877e7b92500%26nonce%3D11df89b0-4bde-4696-a00ed04cf06b9ab2%26acr_values%3Dtenant%253Acl-ben%26ui_locales%3Des#"
     end
 

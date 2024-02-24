@@ -7,7 +7,7 @@ module Spree
     preference :return_url_logout, :string
 
     def authorize_code_url
-      ''
+      preferences[:authentication_url]
     end
 
     def return_url_login

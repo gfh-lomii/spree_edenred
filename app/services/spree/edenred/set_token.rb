@@ -8,7 +8,7 @@ module Spree
         return success(edenred_user.token) if edenred_user.present? && edenred_user.token_available?
 
         payment_method = order.payments.last.payment_method
-        url = https://sso.edenred.io/connect/token
+        url = 'https://sso.edenred.io/connect/token'
         # url = URI("https://directpayment.stg.eu.edenred.io/v2/connect/token") # URI("#{payment_method.preferences[:authentication_url]}/connect/token")
         https = Net::HTTP.new(url.host, url.port)
         https.use_ssl = true

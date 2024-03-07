@@ -13,7 +13,7 @@ module Spree
 
       def new_payment_request(order, token)
         preferences = order.payments.last.payment_method.preferences
-        payment_url = 'https://sso.edenred.io' # preferences[:payment_url]
+        payment_url = preferences[:payment_url] # 'https://directpayment.sa.edenred.io'
         url = URI("#{payment_url}/v2/transactions")
         https = Net::HTTP.new(url.host, url.port)
         https.use_ssl = true
